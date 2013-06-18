@@ -33,6 +33,7 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         $data = array_change_key_case($data, CASE_LOWER);
 
         $btcusd = $this->getConf('btcusd');
+        $eurusd = $this->getConf('eurusd');
 
         $id = $data['id'];
         $name = $data['name'];
@@ -51,10 +52,12 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         if (!$price_usd) {
             $price_usd = $price_btc * $btcusd;
         }
+        $price_eur = $price_usd / $eurusd;
 
         $out  = '<form method="post" action="">';
         $out .= '<table class="eshop_plugin">';
         $out .= sprintf('<tr><th>Price in USD:</th><td class="price">%0.2f</td></tr>', $price_usd);
+        $out .= sprintf('<tr><th>Price in EUR:</th><td class="price">%0.2f</td></tr>', $price_eur);
         $out .= sprintf('<tr><th>Price in BTC:</th><td class="price">%0.3f</td></tr>', $price_btc);
         $out .= '<tr><th>Quantity:</th><td class="count"><select name="count">';
         for ($i = 1; $i <= 10; $i++) {
@@ -66,7 +69,6 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         $out .= sprintf('<input type="hidden" name="id" value="%s" />', $id);
         $out .= sprintf('<input type="hidden" name="name" value="%s" />', $name);
         $out .= sprintf('<input type="hidden" name="btc" value="%f" />', $price_btc);
-        $out .= sprintf('<input type="hidden" name="usd" value="%f" />', $price_usd);
         $out .= '</form>';
 
         return $out;
