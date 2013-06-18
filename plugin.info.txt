@@ -1,0 +1,7 @@
+base	eshop
+author	Pavol Rusnak
+email	stick@gk2.sk
+date	2011-11-08
+name	E-shop Plugin
+desc	Displays forms for ordering things from e-shop
+url		http://www.dokuwiki.org/plugin:eshop
