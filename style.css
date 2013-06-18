@@ -1,0 +1,13 @@
+.eshop_plugin th {
+    vertical-align: middle;
+}
+
+.eshop_plugin .price {
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.eshop_plugin .button {
+    text-align: center;
+}

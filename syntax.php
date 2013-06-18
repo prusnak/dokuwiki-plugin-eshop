@@ -44,10 +44,11 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
             $price_usd = $price_btc * $btcusd;
         }
 
-        $out  = '';
-        $out .= '<table><tr>';
-        $out .= sprintf('<td>%0.2f USD</td><td>%0.3f BTC</td>', $price_usd, $price_btc);
-        $out .= '</tr></table>';
+        $out  = '<table class="eshop_plugin">';
+        $out .= sprintf('<tr><th>Price in USD:</th><td class="price">%0.2f USD</td></tr>', $price_usd);
+        $out .= sprintf('<tr><th>Price in BTC:</th><td class="price">%0.3f BTC</td></tr>', $price_btc);
+        $out .= sprintf('<tr><td colspan="2" class="button"><img src="images/bitcoin.png" alt="buy"/></td></tr>');
+        $out .= '</table>';
 
         return $out;
     }
