@@ -31,7 +31,25 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         }
         $data = array_change_key_case($data, CASE_LOWER);
 
-        return print_r($data, true);
+        $btcusd = $this->getConf('btcusd');
+
+        $price_btc = $data['btc'];
+        $price_usd = $data['usd'];
+
+        if (!$price_btc && !$price_usd) return 'ERROR';
+        if (!$price_btc) {
+            $price_btc = $price_usd / $btcusd;
+        }
+        if (!$price_usd) {
+            $price_usd = $price_btc * $btcusd;
+        }
+
+        $out  = '';
+        $out .= '<table><tr>';
+        $out .= sprintf('<td>%0.2f USD</td><td>%0.3f BTC</td>', $price_usd, $price_btc);
+        $out .= '</tr></table>';
+
+        return $out;
     }
 
     function render($mode, &$renderer, $data) {
