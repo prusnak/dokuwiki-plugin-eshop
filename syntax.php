@@ -30,10 +30,12 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
             $data[trim($key)] = trim($value);
         }
         $data = array_change_key_case($data, CASE_LOWER);
+
+        return print_r($data, true);
     }
 
     function render($mode, &$renderer, $data) {
-        $renderer->doc .= print_r($data, true);
+        $renderer->doc .= $data;
         return true;
     }
 
