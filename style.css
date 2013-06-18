@@ -9,6 +9,22 @@
     text-align: right;
 }
 
+.eshop_plugin .count {
+    text-align: right;
+}
+
 .eshop_plugin .button {
     text-align: center;
+}
+
+.eshop_plugin .button .submit {
+    width: 200px;
+    color: #fff;
+    background-color: #006dcc;
+    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.5em;
 }

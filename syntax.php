@@ -34,10 +34,17 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
 
         $btcusd = $this->getConf('btcusd');
 
+        $id = $data['id'];
+        $name = $data['name'];
         $price_btc = $data['btc'];
         $price_usd = $data['usd'];
 
-        if (!$price_btc && !$price_usd) return 'ERROR';
+        if (!$id) return 'ESHOP ERROR: id missing';
+
+        if (!$name) return 'ESHOP ERROR: name missing';
+
+        if (!$price_btc && !$price_usd) return 'ESHOP ERROR: Both btc and usd prices missing';
+
         if (!$price_btc) {
             $price_btc = $price_usd / $btcusd;
         }
@@ -45,11 +52,22 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
             $price_usd = $price_btc * $btcusd;
         }
 
-        $out  = '<table class="eshop_plugin">';
+        $out  = '<form method="post" action="">';
+        $out .= '<table class="eshop_plugin">';
         $out .= sprintf('<tr><th>Price in USD:</th><td class="price">%0.2f</td></tr>', $price_usd);
         $out .= sprintf('<tr><th>Price in BTC:</th><td class="price">%0.3f</td></tr>', $price_btc);
-        $out .= '<tr><td colspan="2" class="button"><img src="' . DOKU_PLUGIN_IMAGES . 'bitcoin.png" alt="buy"/></td></tr>';
+        $out .= '<tr><th>Quantity:</th><td class="count"><select name="count">';
+        for ($i = 1; $i <= 10; $i++) {
+            $out .= sprintf('<option value="%d">%d</option>', $i, $i);
+        }
+        $out .= '</select></td></tr>';
+        $out .= '<tr><td colspan="2" class="button"><input class="submit" type="submit" value="Buy"/></td></tr>';
         $out .= '</table>';
+        $out .= sprintf('<input type="hidden" name="id" value="%s" />', $id);
+        $out .= sprintf('<input type="hidden" name="name" value="%s" />', $name);
+        $out .= sprintf('<input type="hidden" name="btc" value="%f" />', $price_btc);
+        $out .= sprintf('<input type="hidden" name="usd" value="%f" />', $price_usd);
+        $out .= '</form>';
 
         return $out;
     }
