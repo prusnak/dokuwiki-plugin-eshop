@@ -56,10 +56,10 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
 
         $out  = '<form method="post" action="">';
         $out .= '<table class="eshop_plugin">';
-        $out .= sprintf('<tr><th>Price in USD:</th><td class="price">%0.2f</td></tr>', $price_usd);
-        $out .= sprintf('<tr><th>Price in EUR:</th><td class="price">%0.2f</td></tr>', $price_eur);
-        $out .= sprintf('<tr><th>Price in BTC:</th><td class="price">%0.3f</td></tr>', $price_btc);
-        $out .= '<tr><th>Quantity:</th><td class="count"><select name="count">';
+        $out .= sprintf('<tr><th>Price in USD:</th><td class="price" id="eshop_price_usd" data-unitprice="%f">%0.2f</td></tr>', $price_usd, $price_usd);
+        $out .= sprintf('<tr><th>Price in EUR:</th><td class="price" id="eshop_price_eur" data-unitprice="%f">%0.2f</td></tr>', $price_eur, $price_eur);
+        $out .= sprintf('<tr><th>Price in BTC:</th><td class="price" id="eshop_price_btc" data-unitprice="%f">%0.3f</td></tr>', $price_btc, $price_btc);
+        $out .= '<tr><th>Quantity:</th><td class="count"><select name="count" id="eshop_count">';
         for ($i = 1; $i <= 10; $i++) {
             $out .= sprintf('<option value="%d">%d</option>', $i, $i);
         }
@@ -68,7 +68,8 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         $out .= '</table>';
         $out .= sprintf('<input type="hidden" name="id" value="%s" />', $id);
         $out .= sprintf('<input type="hidden" name="name" value="%s" />', $name);
-        $out .= sprintf('<input type="hidden" name="btc" value="%f" />', $price_btc);
+        $out .= sprintf('<input type="hidden" name="btcunit" value="%f" />', $price_btc);
+        $out .= sprintf('<input type="hidden" name="btctotal" id="eshop_total" value="%f" />', $price_btc);
         $out .= '</form>';
 
         return $out;
