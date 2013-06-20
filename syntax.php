@@ -6,9 +6,9 @@
  * @author     Pavol Rusnak <stick@gk2.sk>
  */
 
-if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-if(!defined('DOKU_PLUGIN_IMAGES')) define('DOKU_PLUGIN_IMAGES',DOKU_BASE.'lib/plugins/eshop/images/');
+if(!defined('DOKU_INC')) die();
+if(!defined('DOKU_PLUGIN')) die();
+if(!defined('DOKU_PLUGIN_IMAGES')) define('DOKU_PLUGIN_IMAGES',DOKU_PLUGIN.'eshop/images/');
 require_once(DOKU_PLUGIN.'syntax.php');
 
 class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
