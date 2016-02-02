@@ -23,7 +23,7 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         $this->Lexer->addSpecialPattern('\{\{eshop>[^}]*\}\}', $mode, 'plugin_eshop');
     }
 
-    function handle($match, $state, $pos, &$handler) {
+    function handle($match, $state, $pos, Doku_Handler $handler) {
         $match = substr($match, 8, -2);
         $pairs = explode('&', $match);
         foreach ($pairs as $pair) {
@@ -50,7 +50,7 @@ class syntax_plugin_eshop extends DokuWiki_Syntax_Plugin {
         return $data;
     }
 
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if ($data === false || $mode != 'xhtml') return false;
 
         global $INFO;
